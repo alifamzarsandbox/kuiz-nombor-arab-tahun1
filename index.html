@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Aplikasi Kuiz Pendidikan Bahasa Arab Tahun 1 Sekolah Rendah — Angka 1 hingga 10. Lengkap, ceria dan mesra kanak-kanak.">
+  <meta name="theme-color" content="#2563eb">
+  <title>Jom Belajar Angka Arab — Bahasa Arab Tahun 1</title>
+
+  <!-- Google Fonts: Noto Naskh Arabic, Amiri, dan Nunito untuk paparan ceria & mesra murid -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Noto+Naskh+Arabic:wght@600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Pemberitahu Aksesibiliti untuk Pembaca Skrin -->
+  <div id="aria-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Header Aplikasi -->
+  <header class="app-header" role="banner">
+    <div class="header-container">
+      <div class="header-brand">
+        <span class="header-icon" aria-hidden="true">🌟</span>
+        <div class="header-titles">
+          <h1 class="header-title">Jom Belajar Angka Arab</h1>
+          <p class="header-subtitle">Bahasa Arab Tahun 1</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <!-- Butang Kawalan Bunyi -->
+        <button id="btn-sound-toggle" class="btn-icon" aria-label="Hidupkan atau matikan bunyi" title="Bunyi: Hidup">
+          <span id="sound-icon" aria-hidden="true">🔊</span>
+          <span class="btn-sound-text sr-only">Bunyi Hidup</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Kontena Utama Skrin -->
+  <main class="app-main" id="main-content" role="main">
+
+    <!-- ========================================== -->
+    <!-- 1. SKRIN PERMULAAN                         -->
+    <!-- ========================================== -->
+    <section id="screen-start" class="screen screen-active" aria-labelledby="start-title">
+      <div class="screen-card hero-card">
+        <div class="hero-decoration" aria-hidden="true">
+          <span class="floating-badge badge-1">١</span>
+          <span class="floating-badge badge-2">٢</span>
+          <span class="floating-badge badge-3">٣</span>
+          <span class="floating-badge badge-4">٤</span>
+          <span class="floating-badge badge-5">٥</span>
+        </div>
+
+        <div class="hero-content">
+          <div class="hero-logo-box" aria-hidden="true">
+            <span class="hero-arabic-banner" dir="rtl" lang="ar">١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩ ١٠</span>
+          </div>
+
+          <h2 id="start-title" class="hero-heading">Jom Belajar Angka Arab!</h2>
+          <p class="hero-subheading">Kembara Pintar Angka Arab 1 hingga 10 untuk Murid Tahun 1</p>
+
+          <div class="hero-features-preview">
+            <span class="pill-tag">✨ 4 Mod Interaktif</span>
+            <span class="pill-tag">📖 Nota Lengkap</span>
+            <span class="pill-tag">🏆 10 Soalan Setiap Mod</span>
+          </div>
+
+          <div class="hero-buttons">
+            <button id="btn-start-game" class="btn btn-primary btn-large btn-pulse">
+              <span class="btn-emoji" aria-hidden="true">🚀</span>
+              <span class="btn-text">MULA</span>
+            </button>
+            <button id="btn-view-recent-records" class="btn btn-secondary btn-large">
+              <span class="btn-emoji" aria-hidden="true">📋</span>
+              <span class="btn-text">PAPAN KEHADIRAN MURID</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 2. SKRIN MAKLUMAT MURID                    -->
+    <!-- ========================================== -->
+    <section id="screen-student-info" class="screen" aria-labelledby="student-info-title">
+      <div class="screen-card">
+        <div class="card-header-simple">
+          <span class="card-badge-icon" aria-hidden="true">🎒</span>
+          <h2 id="student-info-title" class="screen-heading">Maklumat Murid</h2>
+          <p class="screen-subheading">Sila masukkan nama dan pilih kelas anda sebelum bermula.</p>
+        </div>
+
+        <form id="form-student-info" class="student-form" novalidate>
+          <!-- Mesej Ralat Borang -->
+          <div id="student-info-error" class="alert-box alert-error is-hidden" role="alert">
+            <span class="alert-icon" aria-hidden="true">⚠️</span>
+            <span id="student-info-error-text" class="alert-text">Sila lengkapkan maklumat.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="input-student-name" class="form-label">
+              Nama Murid: <span class="required-star">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="input-student-name" 
+              class="form-input" 
+              placeholder="Contoh: Muhammad Ali / Nur Aisyah" 
+              maxlength="60" 
+              autocomplete="name" 
+              required
+            >
+            <small class="form-hint">Maksimum 60 aksara. Jangan masukkan maklumat peribadi lain.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="input-student-class" class="form-label">
+              Kelas: <span class="required-star">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="input-student-class" 
+              class="form-input" 
+              placeholder="Contoh: 1 Alpha / 2 Bestari / 1 Amanah" 
+              maxlength="40" 
+              autocomplete="off" 
+              list="class-suggestions" 
+              required
+            >
+            <datalist id="class-suggestions">
+              <!-- Diisi secara dinamik daripada config.js sebagai cadangan pantas -->
+            </datalist>
+            <small class="form-hint">Boleh tulis kelas anda mengikut sekolah / tahun masing-masing.</small>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="btn-submit-student" class="btn btn-primary btn-large">
+              <span class="btn-emoji" aria-hidden="true">➡️</span>
+              <span class="btn-text">SETERUSNYA</span>
+            </button>
+            <button type="button" id="btn-back-to-home" class="btn btn-outline">
+              <span class="btn-emoji" aria-hidden="true">🏠</span>
+              <span class="btn-text">KEMBALI KE LAMAN UTAMA</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 3. SKRIN ARAHAN PERMAINAN                  -->
+    <!-- ========================================== -->
+    <section id="screen-instructions" class="screen" aria-labelledby="instructions-title">
+      <div class="screen-card">
+        <div class="card-header-simple">
+          <span class="card-badge-icon" aria-hidden="true">💡</span>
+          <h2 id="instructions-title" class="screen-heading">Sebelum Bermula</h2>
+          <div class="user-greeting-pill">
+            <span aria-hidden="true">👤</span>
+            <span id="instruction-user-greeting">Murid: - | Kelas: -</span>
+          </div>
+        </div>
+
+        <div class="instructions-list-box">
+          <h3 class="instructions-subtitle">5 Panduan Penting untuk Murid Pintar:</h3>
+          <ol class="instructions-ordered-list">
+            <li>
+              <div class="instruction-item">
+                <span class="instruction-num" aria-hidden="true">1</span>
+                <span class="instruction-desc"><strong>Baca nota pembelajaran</strong> terlebih dahulu untuk mengecam angka.</span>
+              </div>
+            </li>
+            <li>
+              <div class="instruction-item">
+                <span class="instruction-num" aria-hidden="true">2</span>
+                <span class="instruction-desc">Kenali bentuk angka Arab dari <strong dir="rtl" lang="ar">١</strong> hingga <strong dir="rtl" lang="ar">١٠</strong> dengan tepat.</span>
+              </div>
+            </li>
+            <li>
+              <div class="instruction-item">
+                <span class="instruction-num" aria-hidden="true">3</span>
+                <span class="instruction-desc"><strong>Jawab setiap soalan dengan teliti</strong> sebelum memilih jawapan.</span>
+              </div>
+            </li>
+            <li>
+              <div class="instruction-item">
+                <span class="instruction-num" aria-hidden="true">4</span>
+                <span class="instruction-desc">Setiap mod kuiz mempunyai <strong>10 soalan</strong> (10 mata untuk setiap soalan betul).</span>
+              </div>
+            </li>
+            <li>
+              <div class="instruction-item">
+                <span class="instruction-num" aria-hidden="true">5</span>
+                <span class="instruction-desc"><strong>Baca maklum balas</strong> yang dipaparkan selepas menjawab soalan.</span>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="instructions-actions">
+          <button id="btn-i-understand" class="btn btn-primary btn-large">
+            <span class="btn-text">TERUSKAN</span>
+            <span class="btn-emoji" aria-hidden="true">➡️</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 4. MENU EMPAT MOD                          -->
+    <!-- ========================================== -->
+    <section id="screen-modes-menu" class="screen" aria-labelledby="modes-title">
+      <div class="screen-card">
+        <div class="modes-top-bar">
+          <div>
+            <h2 id="modes-title" class="screen-heading">Pilih Mod Permainan</h2>
+            <p class="screen-subheading">Pilih mana-mana mod di bawah untuk mula belajar dan bermain.</p>
+          </div>
+          <div class="user-greeting-pill">
+            <span aria-hidden="true">👤</span>
+            <span id="modes-user-greeting">Murid: - | Kelas: -</span>
+          </div>
+        </div>
+
+        <div class="modes-grid">
+          <!-- Kad Mod 1 -->
+          <article class="mode-card card-mod1" data-mode-id="mod1">
+            <div class="mode-card-header">
+              <span class="mode-card-icon" aria-hidden="true">📖</span>
+              <span id="badge-status-mod1" class="mode-status-badge badge-status-not-played">Belum dimainkan</span>
+            </div>
+            <div class="mode-card-body">
+              <h3 class="mode-card-title">MOD 1 — NOTA PEMBELAJARAN</h3>
+              <p class="mode-card-subtitle">Kenali angka Arab 1 hingga 10</p>
+              <p class="mode-card-desc">Terokai 10 kad pembelajaran interaktif dengan angka, sebutan dan maksud Bahasa Melayu.</p>
+            </div>
+            <div class="mode-card-footer">
+              <button class="btn btn-mode-action btn-mod1" data-action="open-mode" data-mode-id="mod1">
+                <span>BUKA NOTA</span> <span>➡️</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Kad Mod 2 -->
+          <article class="mode-card card-mod2" data-mode-id="mod2">
+            <div class="mode-card-header">
+              <span class="mode-card-icon" aria-hidden="true">🔢</span>
+              <span id="badge-status-mod2" class="mode-status-badge badge-status-not-played">Belum dimainkan</span>
+            </div>
+            <div class="mode-card-body">
+              <h3 class="mode-card-title">MOD 2 — KENALI ANGKA ARAB</h3>
+              <p class="mode-card-subtitle">Padankan angka biasa dengan angka Arab</p>
+              <p class="mode-card-desc">Pilih padanan angka Arab yang betul (١-١٠) bagi setiap nombor biasa yang ditunjukkan.</p>
+            </div>
+            <div class="mode-card-footer">
+              <button class="btn btn-mode-action btn-mod2" data-action="open-mode" data-mode-id="mod2">
+                <span>MULA KUIZ</span> <span>➡️</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Kad Mod 3 -->
+          <article class="mode-card card-mod3" data-mode-id="mod3">
+            <div class="mode-card-header">
+              <span class="mode-card-icon" aria-hidden="true">🍎</span>
+              <span id="badge-status-mod3" class="mode-status-badge badge-status-not-played">Belum dimainkan</span>
+            </div>
+            <div class="mode-card-body">
+              <h3 class="mode-card-title">MOD 3 — KIRA DAN PILIH ANGKA ARAB</h3>
+              <p class="mode-card-subtitle">Kira objek dan pilih angka Arab yang betul</p>
+              <p class="mode-card-desc">Kira bilangan objek comel yang dipaparkan dan pilih simbol angka Arab yang sepadan.</p>
+            </div>
+            <div class="mode-card-footer">
+              <button class="btn btn-mode-action btn-mod3" data-action="open-mode" data-mode-id="mod3">
+                <span>MULA KUIZ</span> <span>➡️</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Kad Mod 4 -->
+          <article class="mode-card card-mod4" data-mode-id="mod4">
+            <div class="mode-card-header">
+              <span class="mode-card-icon" aria-hidden="true">✨</span>
+              <span id="badge-status-mod4" class="mode-status-badge badge-status-not-played">Belum dimainkan</span>
+            </div>
+            <div class="mode-card-body">
+              <h3 class="mode-card-title">MOD 4 — PILIH PERKATAAN BAGI ANGKA ARAB</h3>
+              <p class="mode-card-subtitle">Kenali perkataan Bahasa Arab bagi setiap angka</p>
+              <p class="mode-card-desc">Lihat angka Arab dan pilih ejaan perkataan Bahasa Arab yang betul dengan baris lengkap.</p>
+            </div>
+            <div class="mode-card-footer">
+              <button class="btn btn-mode-action btn-mod4" data-action="open-mode" data-mode-id="mod4">
+                <span>MULA KUIZ</span> <span>➡️</span>
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <div class="modes-bottom-actions">
+          <button id="btn-modes-to-home" class="btn btn-outline">
+            <span class="btn-emoji" aria-hidden="true">🏠</span>
+            <span class="btn-text">LAMAN UTAMA</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 5. SKRIN NOTA PEMBELAJARAN                 -->
+    <!-- ========================================== -->
+    <section id="screen-notes" class="screen" aria-labelledby="notes-heading">
+      <div class="screen-card notes-container-card">
+        <div class="notes-header">
+          <div>
+            <h2 id="notes-heading" class="screen-heading">Mod 1 — Nota Pembelajaran</h2>
+            <p class="screen-subheading">Kenali angka Arab 1 hingga 10</p>
+          </div>
+          <div class="notes-counter-badge" id="notes-card-counter">
+            Kad 1 daripada 10
+          </div>
+        </div>
+
+        <!-- Kad Pembelajaran Utama -->
+        <div class="note-card-box" id="note-card-display">
+          <div class="note-card-top-row">
+            <div class="note-digit-pill">
+              <span class="note-digit-label">Angka Biasa:</span>
+              <span class="note-digit-val" id="note-digit-val">1</span>
+            </div>
+            <div class="note-meaning-pill">
+              <span class="note-meaning-label">Maksud:</span>
+              <strong class="note-meaning-val" id="note-meaning-val">Satu</strong>
+            </div>
+          </div>
+
+          <!-- Paparan Angka Arab Besar -->
+          <div class="note-arabic-numeral-display">
+            <span class="note-arabic-numeral" id="note-arabic-numeral" dir="rtl" lang="ar">١</span>
+          </div>
+
+          <!-- Paparan Perkataan Arab & Transliterasi -->
+          <div class="note-arabic-word-display">
+            <p class="note-arabic-word" id="note-arabic-word" dir="rtl" lang="ar">وَاحِدٌ</p>
+            <p class="note-transliteration" id="note-transliteration">Wāḥidun</p>
+          </div>
+
+          <!-- Objek Contoh Visual -->
+          <div class="note-visual-objects" id="note-visual-objects" aria-label="Objek ilustrasi">
+            <!-- Ikon objek dimuatkan di sini secara dinamik -->
+          </div>
+        </div>
+
+        <!-- Butang Navigasi Kad Nota -->
+        <div class="notes-nav-controls">
+          <!-- Penunjuk Kedudukan 10 Titik Bulat -->
+          <div class="notes-dots-indicator" id="notes-dots-container" aria-label="Penunjuk kedudukan kad">
+            <!-- 10 titik bulat diisi oleh JS -->
+          </div>
+
+          <!-- Baris Butang Sebelumnya & Seterusnya (Sentiasa kelihatan penuh & seimbang pada telefon) -->
+          <div class="notes-nav-buttons-row">
+            <button id="btn-note-prev" class="btn btn-secondary btn-nav-card" aria-label="Kad Sebelumnya">
+              <span class="btn-emoji" aria-hidden="true">⬅️</span>
+              <span class="btn-text">Sebelumnya</span>
+            </button>
+            <button id="btn-note-next" class="btn btn-secondary btn-nav-card" aria-label="Kad Seterusnya">
+              <span class="btn-text">Seterusnya</span>
+              <span class="btn-emoji" aria-hidden="true">➡️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Butang Bawah Nota -->
+        <div class="notes-bottom-controls">
+          <button id="btn-finish-notes" class="btn btn-accent btn-large">
+            <span class="btn-emoji" aria-hidden="true">✅</span>
+            <span class="btn-text">SELESAI MEMBACA NOTA</span>
+          </button>
+          <button id="btn-back-to-modes-from-notes" class="btn btn-outline">
+            <span class="btn-emoji" aria-hidden="true">📋</span>
+            <span class="btn-text">KEMBALI KE MENU MOD</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 6. SKRIN SOALAN KUIZ                       -->
+    <!-- ========================================== -->
+    <section id="screen-quiz" class="screen" aria-labelledby="quiz-question-text">
+      <div class="screen-card quiz-card">
+        <!-- Header Info Kuiz -->
+        <div class="quiz-info-bar">
+          <div class="quiz-student-meta">
+            <span class="badge-mini-user" id="quiz-student-display">👤 Murid: -</span>
+            <span class="badge-mini-class" id="quiz-class-display">Kelas: -</span>
+          </div>
+          <div class="quiz-mode-tag" id="quiz-mode-tag">
+            MOD 2 — KENALI ANGKA ARAB
+          </div>
+        </div>
+
+        <!-- Bar Kemajuan Soalan -->
+        <div class="quiz-progress-section">
+          <div class="quiz-progress-text-row">
+            <span class="quiz-question-counter" id="quiz-question-counter">Soalan 1 daripada 10</span>
+            <span class="quiz-score-preview" id="quiz-score-preview">Markah: 0 / 100</span>
+          </div>
+          <div class="progress-bar-container" role="progressbar" id="quiz-progress-bar-container" aria-valuenow="1" aria-valuemin="1" aria-valuemax="10" aria-label="Kemajuan soalan">
+            <div class="progress-bar-fill" id="quiz-progress-bar-fill" style="width: 10%;"></div>
+          </div>
+        </div>
+
+        <!-- Kawasan Soalan -->
+        <div class="quiz-question-box">
+          <h2 id="quiz-question-text" class="quiz-question-prompt">
+            Pilih angka Arab bagi nombor di bawah:
+          </h2>
+
+          <!-- Kawasan Paparan Soalan (Angka biasa / Objek / Angka Arab) -->
+          <div class="quiz-stimulus-display" id="quiz-stimulus-display">
+            <!-- Disuntik secara dinamik mengikut mod soalan -->
+          </div>
+        </div>
+
+        <!-- Pilihan Jawapan (4 Pilihan) -->
+        <div class="quiz-choices-grid" id="quiz-choices-grid" role="group" aria-label="Pilihan Jawapan">
+          <!-- 4 Butang pilihan dihasilkan oleh JavaScript -->
+        </div>
+
+        <!-- Kotak Maklum Balas Segera -->
+        <div id="quiz-feedback-box" class="quiz-feedback-box is-hidden" aria-live="polite">
+          <div class="feedback-content">
+            <span id="feedback-icon" class="feedback-icon" aria-hidden="true">🎉</span>
+            <div class="feedback-text-wrap">
+              <strong id="feedback-heading" class="feedback-heading">Tahniah! Jawapan betul.</strong>
+              <p id="feedback-desc" class="feedback-desc">Penerangan jawapan akan dipaparkan di sini.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Butang Seterusnya (Muncul selepas jawapan dipilih) -->
+        <div class="quiz-action-bar">
+          <button id="btn-next-question" class="btn btn-primary btn-large is-hidden">
+            <span class="btn-text">SOALAN SETERUSNYA</span>
+            <span class="btn-emoji" aria-hidden="true">➡️</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 7. SKRIN KEPUTUSAN                         -->
+    <!-- ========================================== -->
+    <section id="screen-result" class="screen" aria-labelledby="result-heading">
+      <div class="screen-card result-card">
+        <div class="result-celebration-badge" aria-hidden="true" id="result-trophy-badge">🏆</div>
+        
+        <h2 id="result-heading" class="result-title">Tahniah, Murid!</h2>
+        <p class="result-subtitle" id="result-subtitle">Kelas: 1 Alpha | Mod: Kenali Angka Arab</p>
+
+        <!-- Kad Skor Utama -->
+        <div class="result-score-banner">
+          <div class="score-circle">
+            <span class="score-number" id="result-score-val">100</span>
+            <span class="score-label">MARKAH</span>
+          </div>
+          <div class="score-details-list">
+            <div class="score-detail-item">
+              <span class="detail-label">Keputusan Soalan:</span>
+              <strong class="detail-val" id="result-fraction-val">10 / 10</strong>
+            </div>
+            <div class="score-detail-item">
+              <span class="detail-label">Peratusan:</span>
+              <strong class="detail-val" id="result-percent-val">100%</strong>
+            </div>
+            <div class="score-detail-item">
+              <span class="detail-label">Jawapan Betul:</span>
+              <span class="badge-count count-correct" id="result-correct-count">10</span>
+            </div>
+            <div class="score-detail-item">
+              <span class="detail-label">Jawapan Salah:</span>
+              <span class="badge-count count-wrong" id="result-wrong-count">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mesej Prestasi Galakan -->
+        <div class="result-message-box" id="result-message-box">
+          <p class="result-message-text" id="result-encouragement-text">
+            Cemerlang! Semua jawapan betul!
+          </p>
+        </div>
+
+
+        <!-- Butang Tindakan Selepas Keputusan -->
+        <div class="result-actions">
+          <button id="btn-replay-mode" class="btn btn-primary btn-large">
+            <span class="btn-emoji" aria-hidden="true">🔄</span>
+            <span class="btn-text">CUBA LAGI MOD INI</span>
+          </button>
+          <button id="btn-choose-other-mode" class="btn btn-secondary btn-large">
+            <span class="btn-emoji" aria-hidden="true">📑</span>
+            <span class="btn-text">PILIH MOD LAIN</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 8. SKRIN PAPAN KEHADIRAN                   -->
+    <!-- ========================================== -->
+    <section id="screen-recent-records" class="screen" aria-labelledby="records-title">
+      <div class="screen-card">
+        <div class="records-top-bar">
+          <div>
+            <h2 id="records-title" class="screen-heading">Papan Kehadiran Murid</h2>
+            <p class="screen-subheading">Senarai kehadiran murid (sehingga 30 rekod terkini).</p>
+          </div>
+          <div class="records-header-btns">
+            <button id="btn-refresh-records" class="btn btn-secondary" title="Segarkan semula senarai kehadiran">
+              <span class="btn-emoji" aria-hidden="true">🔄</span>
+              <span class="btn-text">Refresh</span>
+            </button>
+            <button id="btn-records-to-home" class="btn btn-outline">
+              <span class="btn-emoji" aria-hidden="true">🏠</span>
+              <span class="btn-text">Kembali ke Utama</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Status Memuatkan / Ralat / Kosong -->
+        <div id="records-status-container" class="records-status-wrap">
+          <!-- Dimasukkan dinamik -->
+        </div>
+
+        <!-- Senarai Kad Kehadiran Murid -->
+        <div id="records-list-container" class="attendance-cards-grid">
+          <!-- Kad Kehadiran Dimuatkan di Sini -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Aplikasi -->
+  <footer class="app-footer" role="contentinfo">
+    <div class="footer-container">
+      <p class="footer-text">
+        <strong>Jom Belajar Bahasa Arab</strong> | Kelas Ustaz Alif
+      </p>
+    </div>
+  </footer>
+
+  <!-- Pemuatan Skrip Mengikut Urutan Bersih -->
+  <script src="config.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
